@@ -1,6 +1,10 @@
 mod Method_struct;
+mod tuple_struct;
 use Method_struct::Rectangle;
-
+use Method_struct::Cube;
+use Method_struct::Rectangle1;
+use tuple_struct::color;
+use tuple_struct::Numbers;
 
 struct user{
     username: String,
@@ -72,6 +76,8 @@ let user3 = create_user(
  println!("username:{}", user_3_new.active);
 */
 
+/* 
+
 
 
 //Adding methods with impl
@@ -85,6 +91,82 @@ let fisrt_rectangle = Rectangle {
 println!("Area{}",fisrt_rectangle.area());
 println!("Area{}",fisrt_rectangle.perimeter());
 println!("Area{}",fisrt_rectangle.is_square());
+
+*/
+
+
+/* 
+
+
+
+
+
+//Self
+
+// 1. Create a 10x5 rectangle using Cube::new(...)
+let cube_new = Cube::new(2,3,4);
+// Call calculation methods
+    println!("--- Initial Cube (2x3x4) ---");
+    println!("Volume: {} sq units", cube_new.volume());         
+    println!("Perimeter: {} units", cube_new.perimeter());    
+    println!("Is it a square? {}\n", cube_new.is_square());   
+// 2. Call scale(&self) to create a new double-sized Cube
+    let scaled_rect =cube_new.scale(2); 
+
+    println!("--- Scaled Rectangle (20x10) ---");
+    println!("Scaled Area: {} sq units", scaled_rect.volume()); 
+    // 3. Create a square using Cube::square(...)
+    let my_square = Cube::square(7); 
+
+    println!("\n--- Square Instance (7x7) ---");
+    println!("Square Area: {} sq units", my_square.volume());    
+    println!("Is it a square? {}", my_square.is_square());  
+*/
+
+
+
+
+/* 
+   //&mut self
+
+     // IMPORTANT: The variable MUST be declared as `mut` to call &mut self methods!
+    let mut rect = Rectangle1::new(10, 5);
+
+    println!("Original Area: {}", rect.area()); // 10 * 5 = 50
+
+    // Modifies `rect` directly
+    rect.scale_in_place(2);
+    println!("After Scaling: {}x{}", rect.width, rect.height); // 20x10
+    println!("New Area: {}", rect.area()); // 20 * 10 = 200
+
+    // Modifies `rect` again
+    rect.expand(5, 5);
+    println!("After Expanding: {}x{}", rect.width, rect.height); // 25x15  
+    */
+
+
+/* 
+    // tuple structs
+
+    let orange = color(255,165,0);
+    // accessing the fields
+
+println!("Red:{}", orange.0);
+println!("Green:{}", orange.1);
+println!("Blue:{}", orange.2);
+  //Destructuring a tuple struct : You can extract its fields into separate variables:
+  let color(red,green,blue) = orange; //means: put orange.0 into red put orange.1 into green put orange.2 into blue
+    println!("Red: {red}");
+    println!("Green: {green}");
+    println!("Blue: {}",blue);
+*/
+// tuple Methods 
+
+let multiplication_new = Numbers(2,5);
+
+println!("first_number: {}", multiplication_new.0);
+println!("secon_number: {}", multiplication_new.1);
+println!("{}", multiplication_new.multiplication());
 
 
 }

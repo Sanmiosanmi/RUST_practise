@@ -22,6 +22,8 @@ impl Rectangle {
 }
 
 
+
+//SELF
 /*
 The most important distinction is:
 
@@ -89,8 +91,8 @@ pub fn scale(&self, factor: u32) -> Self {
 }
 
 // Calculation methods (Borrowing &self)
-    pub fn area(&self) -> u32 {
-        self.width * self.height
+    pub fn volume(&self) -> u32 {
+        self.width * self.height * self.length
     }
 
     pub fn perimeter(&self) -> u32 {
@@ -98,6 +100,37 @@ pub fn scale(&self, factor: u32) -> Self {
     }
 
     pub fn is_square(&self) -> bool {
-        self.width == self.height
+        self.width == self.height 
+    }
+}
+
+//&mut self
+pub struct Rectangle1 {
+    pub  width: u32,
+    pub height: u32,
+}
+
+impl Rectangle1 {
+    pub fn new(width: u32, height: u32) -> Self {
+        Self { width, height }
+    }
+
+    // --- READ-ONLY METHOD (&self) ---
+    pub fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    // --- MUTATING METHODS (&mut self) ---
+    
+    // Scale the rectangle in place by a multiplier
+    pub fn scale_in_place(&mut self, factor: u32) {
+        self.width *= factor;
+        self.height *= factor;
+    }
+
+    // Increase dimensions by specific amounts
+    pub fn expand(&mut self, add_width: u32, add_height: u32) {
+        self.width += add_width;
+        self.height += add_height;
     }
 }
