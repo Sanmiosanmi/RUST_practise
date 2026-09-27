@@ -1,11 +1,22 @@
 mod Method_struct;
 mod tuple_struct;
+
+
+use std::io::ErrorKind::NetworkDown;
 use Method_struct::Rectangle;
 use Method_struct::Cube;
 use Method_struct::Rectangle1;
 use tuple_struct::color;
+use tuple_struct::Color;
+use tuple_struct::UserId;
+use tuple_struct::ProductId;
 use tuple_struct::Numbers;
+use crate::tuple_struct::Point;
+use crate::tuple_struct::display_color;
+use crate::tuple_struct::find_user;
 
+
+//structs
 struct user{
     username: String,
     email: String,
@@ -148,7 +159,8 @@ let cube_new = Cube::new(2,3,4);
 /* 
     // tuple structs
 
-    let orange = color(255,165,0);
+    let orange = color(255,165,0);  // here we say the type of orange is color. the tuple struct provides a meaniful and distinct
+    //type name
     // accessing the fields
 
 println!("Red:{}", orange.0);
@@ -160,6 +172,8 @@ println!("Blue:{}", orange.2);
     println!("Green: {green}");
     println!("Blue: {}",blue);
 */
+
+/* 
 // tuple Methods 
 
 let multiplication_new = Numbers(2,5);
@@ -168,5 +182,16 @@ println!("first_number: {}", multiplication_new.0);
 println!("secon_number: {}", multiplication_new.1);
 println!("{}", multiplication_new.multiplication());
 
+
+
+let color1 = Color(2,3,4);
+    display_color(color1);
+let Point1 = Point(5,6,7);
+ //   display_color(Point1);//wont run, tuple structs prevent unrelated values from mixing 
+*/
+
+
+let new_userid = UserId(23);
+find_user(new_userid);
 
 }

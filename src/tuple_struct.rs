@@ -22,8 +22,21 @@ impl Numbers{
     }
 }
 
+//Different tuple structs are different types. Color and points contain the same exact filed, but they are differen types. 
+pub struct Color(pub i32,pub i32,pub i32); // its type is (i32,i32,i32)
+pub struct Point(pub i32,pub i32,pub i32);
+pub fn display_color(newcolor:Color){
+    println!("{},{},{}", newcolor.0,newcolor.1,newcolor.2);
+  //calling it in line 174
+}
 
+//Tuple with one field: a tuple structs can contain just one field
+pub struct UserId(pub u32);
+pub struct ProductId(pub u32);
+//let create a function
+pub fn find_user(id: UserId){
+    println!("Finding User {}",id.0) // let call it in line 192
 
-
+}
 
 
