@@ -1,5 +1,6 @@
 mod Method_struct;
 mod tuple_struct;
+mod enums;
 
 
 use std::io::ErrorKind::NetworkDown;
@@ -11,6 +12,10 @@ use tuple_struct::Color;
 use tuple_struct::UserId;
 use tuple_struct::ProductId;
 use tuple_struct::Numbers;
+use crate::enums::ConnectionState;
+use crate::enums::NetworkEvent;
+use crate::enums::describe;
+use crate::enums::handle_event;
 use crate::tuple_struct::Point;
 use crate::tuple_struct::display_color;
 use crate::tuple_struct::find_user;
@@ -188,10 +193,19 @@ let color1 = Color(2,3,4);
     display_color(color1);
 let Point1 = Point(5,6,7);
  //   display_color(Point1);//wont run, tuple structs prevent unrelated values from mixing 
-*/
+
 
 
 let new_userid = UserId(23);
 find_user(new_userid);
+*/
+
+
+            //ENUMS
+let state = ConnectionState::Connecting; // we can only assign the variants we define in the enum
+ describe(state);
+
+ let event_new = NetworkEvent::Connected(String:: from ("Router 01"));
+    handle_event(event_new);
 
 }
