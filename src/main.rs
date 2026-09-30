@@ -12,6 +12,8 @@ use tuple_struct::Color;
 use tuple_struct::UserId;
 use tuple_struct::ProductId;
 use tuple_struct::Numbers;
+use crate::enums::_status_code;
+use crate::enums::_status_code_new;
 use crate::enums::ConnectionState;
 use crate::enums::NetworkEvent;
 use crate::enums::describe;
@@ -19,6 +21,7 @@ use crate::enums::handle_event;
 use crate::tuple_struct::Point;
 use crate::tuple_struct::display_color;
 use crate::tuple_struct::find_user;
+use enums::_Interface;
 
 
 //structs
@@ -201,6 +204,8 @@ find_user(new_userid);
 */
 
 
+/* 
+
             //ENUMS
 let state = ConnectionState::Connecting; // we can only assign the variants we define in the enum
  describe(state);
@@ -208,4 +213,32 @@ let state = ConnectionState::Connecting; // we can only assign the variants we d
  let event_new = NetworkEvent::Connected(String:: from ("Router 01"));
     handle_event(event_new);
 
+let state = ConnectionState::Connected;
+let code = _status_code(state);
+println!("ststus code: {code}");
+
+
+let state_new = ConnectionState::Connected;
+let state_new_2 = ConnectionState::Connecting;
+_status_code_new(state_new);
+_status_code_new(state_new_2);
+
+
+    let state = _Interface::Int0;
+    if let _Interface::Int0 = state{
+    println!("Connected to interface 0")        
+    } 
+
+
+let state1 = _Interface::Int2 (String::from("Connected to interface 2"));
+    if let _Interface::Int2(content) = state1{
+    println!("{content}");        
+    }    
+
+*/
+
+    //using the methods define
+let state = ConnectionState::Connected;
+println!("{}",state.description());
+println!("{}",state.is_connected());
 }

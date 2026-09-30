@@ -36,6 +36,8 @@ pub fn describe (state:ConnectionState) {
     } //see line 203 
 } // NB: Rust require us to match every variants in the enum, if  ConnectionState::Connected  match arm was ommited, it wont compile
 
+
+                //Using MATCH in enums
         //Extractin the data stored in the variants 
 pub fn handle_event (event: NetworkEvent) {
     match event {
@@ -55,5 +57,73 @@ pub fn handle_event (event: NetworkEvent) {
             println!("data sent")
         }
         
+    }
+}
+
+
+// match can retrun a value: it can calculate and return a value
+pub fn _status_code(state: ConnectionState) -> u32{
+    match state{
+        ConnectionState::Connected =>1,
+        ConnectionState::Connecting => 2,
+        ConnectionState::Disconnected => 0,
+    } //see line 213
+}
+
+            //match want us to define a match for every variants.if we want to define for only one, we can use the _
+
+pub fn _status_code_new(state_new: ConnectionState) {
+    match state_new{
+        ConnectionState::Connected => println!("welcome connected"),
+        _ => println!("Nothing"), //for other variants, this is printed
+    } // see lin 220
+}// careful how u use the _ because it can hide new variants
+
+   // another method to run only a selected variant in match is to use the IF LET
+                //IF LET
+//we define a new enums
+pub enum _Interface {
+    Int0,
+    Int1,
+    Int2(String),
+    Int3,
+} //see line 227
+
+// we can use the let if to extract stored data see line 233
+
+
+
+                //Addig methods to Enums
+//Enums can have methods through an impl block, just like structs. 
+impl ConnectionState {
+   pub  fn description(&self) -> &str {
+        match self {
+            Self::Connected => "No Connection",
+            Self::Connecting => "Now connecting",
+            _=> "welcome",
+        }
+   }
+   // under the impl we define another method
+   pub fn is_connected(&self) -> bool {
+    match self {
+         Self::Connected => true,
+         _=> false,
+    }
+   }
+} // see line 240
+
+
+            //option<T> : Rust alternative to null
+    // it represnt a value that may or may not exist 
+enum MyOption<T> {
+    Some(T), //means a value may exist
+    None, //means no value exist
+}
+
+fn find_device(available:bool) -> MyOption<String> {
+    if available {
+        Some(String::from("Router-01"))
+    }else {
+        None
     }
 }
