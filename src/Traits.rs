@@ -13,8 +13,7 @@ pub struct Router {
 }
 
 //--see line 248
-/*
-fn main() {
+/*{
    
 
     // Debug: print the struct's fields.
@@ -33,5 +32,31 @@ fn main() {
 
     // router1 is still available and unchanged.
     println!("Original name: {}", router1.name);
-}
+
 */
+
+    //CONCEPT OF SUPERTRAIT
+// WE DEFINE TWO Traitstrait
+trait Describe {
+    fn describe(&self) -> String;
+}
+// Describe is supertrait of Connect
+pub trait Connect: Describe {
+    fn connect(&self);
+}
+// Next we implement both traits for a type Router1
+pub struct Router1 {
+    pub name: String,
+}
+
+impl Describe for Router1 {
+    fn describe(&self) -> String {
+        format!("Router1: {}", self.name)
+    }
+}
+
+impl Connect for Router1 {
+    fn connect(&self) {
+        println!("{} is connecting...", self.describe());
+    }
+}

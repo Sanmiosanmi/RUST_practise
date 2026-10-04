@@ -13,6 +13,8 @@ use tuple_struct::Color;
 use tuple_struct::UserId;
 use tuple_struct::ProductId;
 use tuple_struct::Numbers;
+use crate::Traits::Router1;
+use crate::Traits::Connect;
 use crate::enums::_status_code;
 use crate::enums::_status_code_new;
 use crate::enums::ConnectionState;
@@ -24,6 +26,7 @@ use crate::tuple_struct::display_color;
 use crate::tuple_struct::find_user;
 use enums::_Interface;
 use Traits::Router;
+
 
 
 //structs
@@ -271,4 +274,13 @@ println!("{}",state.is_connected());
     // router1 is still available and unchanged.
     println!("Original name: {}", router1.name);
 */
+
+
+
+    let router = Router1 {
+        name: String::from("Office"),
+    };
+
+    router.connect();
 }
+
