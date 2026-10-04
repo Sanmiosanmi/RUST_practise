@@ -15,6 +15,9 @@ use tuple_struct::ProductId;
 use tuple_struct::Numbers;
 use crate::Traits::Router1;
 use crate::Traits::Connect;
+use crate::Traits::Logger;
+use crate::Traits::StderrLogger;
+use crate::Traits::VerbosityFilter;
 use crate::enums::_status_code;
 use crate::enums::_status_code_new;
 use crate::enums::ConnectionState;
@@ -282,5 +285,11 @@ println!("{}",state.is_connected());
     };
 
     router.connect();
+
+
+    //Assignment on Traits
+let logger = VerbosityFilter { max_verbosity: 3, inner: StderrLogger };
+  logger.log(5, "FYI");
+  logger.log(2, "Uhoh");
 }
 

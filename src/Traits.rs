@@ -59,4 +59,60 @@ impl Connect for Router1 {
     fn connect(&self) {
         println!("{} is connecting...", self.describe());
     }
+}  //see line 280
+
+
+
+// we cnân write a fixed function that run both traits 
+fn use_device<T: Connect>(device: &T) {
+    println!("{}", device.describe());
+    device.connect();
+}
+
+/*
+
+// we can more thsn one supertrait
+trait Connect1: Describe + Clone {
+    fn Connect1(&self);
+}
+*/
+    //Traits Assignment
+/*Let’s design a simple logging utility, using a trait Logger with a log method. Code which
+ might log its progress can then take an &impl Logger. In testing, this might put messages in 
+ the test logfile, while in a production build it would send messages to a log server.
+
+However, the StderrLogger given below logs all messages, regardless of verbosity. 
+
+Your task is to write a VerbosityFilter type that will ignore messages above a maximum verbosity.
+This is a common pattern: a struct wrapping a trait implementation and implementing that same 
+trait, adding behavior in the process. In the Generics segment, we will see how to make the wrapper generic over the wrapped type.
+*/
+
+pub trait Logger {
+  /// Log a message at the given verbosity level.
+  fn log(&self, verbosity: u8, message: &str);
+}
+
+pub struct StderrLogger;
+
+impl Logger for StderrLogger {
+  fn log(&self, verbosity: u8, message: &str) {
+      eprintln!("verbosity={verbosity}: {message}");
+  }
+}
+
+/// Only log messages up to the given verbosity level.
+pub struct VerbosityFilter {
+  pub max_verbosity: u8,
+  pub inner: StderrLogger,
+}
+
+// TODO: Implement the `Logger` trait for `VerbosityFilter`.
+impl Logger for VerbosityFilter{
+    fn log(&self, verbosity: u8, message: &str){
+        if verbosity <= self.max_verbosity {
+            self.inner.log(verbosity, message);
+        }  
+    }
+
 }
