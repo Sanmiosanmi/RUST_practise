@@ -112,18 +112,16 @@ impl ConnectionState {
    }
 } // see line 240
 
-
+/*
             //option<T> : Rust alternative to null
     // it represnt a value that may or may not exist 
-enum MyOption<T> {
-    Some(T), //means a value may exist
-    None, //means no value exist
-}
 
-fn find_device(available:bool) -> MyOption<String> {
+fn find_device(available:bool) -> &Str {
     if available {
         Some(String::from("Router-01"))
     }else {
         None
     }
 }
+
+*/

@@ -1,6 +1,7 @@
 mod Method_struct;
 mod tuple_struct;
 mod enums;
+mod Traits;
 
 
 use std::io::ErrorKind::NetworkDown;
@@ -22,6 +23,7 @@ use crate::tuple_struct::Point;
 use crate::tuple_struct::display_color;
 use crate::tuple_struct::find_user;
 use enums::_Interface;
+use Traits::Router;
 
 
 //structs
@@ -236,9 +238,37 @@ let state1 = _Interface::Int2 (String::from("Connected to interface 2"));
     }    
 
 */
-
+/*
     //using the methods define
 let state = ConnectionState::Connected;
 println!("{}",state.description());
 println!("{}",state.is_connected());
+
+*/
+
+/*
+
+ let router1 = Router {
+        name: String::from("Office"),
+        ip_address: String::from("192.168.1.1"),
+    };
+  // Debug: print the struct's fields.
+    println!("{:?}", router1);
+
+     // Clone: create another Router with the same field values.
+  let mut router2 = router1.clone();
+    println!("{:?}", router2);
+
+    // PartialEq: compare the field values of both routers.
+    println!("Are they equal? {}", router1 == router2);
+
+  // Change one field in router2. since we already declear it as mut in line 258
+    router2.name = String::from("Home");
+    println!("{:?}", router2);
+
+    println!("Are they still equal? {}", router1 == router2);
+
+    // router1 is still available and unchanged.
+    println!("Original name: {}", router1.name);
+*/
 }
