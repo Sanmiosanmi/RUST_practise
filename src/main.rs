@@ -1,3 +1,5 @@
+
+/* 
 mod Method_struct;
 mod tuple_struct;
 mod enums;
@@ -49,7 +51,7 @@ fn create_user(username:String, email:String) -> user {
         active: true,
     }
 }
-
+*/
 
     //generally 
 
@@ -279,7 +281,7 @@ println!("{}",state.is_connected());
 */
 
 
-
+/* 
     let router = Router1 {
         name: String::from("Office"),
     };
@@ -291,5 +293,66 @@ println!("{}",state.is_connected());
 let logger = VerbosityFilter { max_verbosity: 3, inner: StderrLogger };
   logger.log(5, "FYI");
   logger.log(2, "Uhoh");
+  */
+
+
+  //   GENERICS
+ // Generics with IMPL blocks
+ /* when we write  and impl method for a generic struct, we have to deine the type it will accept
+ ahead. the only felxibilty is that we can write diffrernt impl block for the same struct, just by changing the tpye expeected
+   */
+ 
+#[derive(Debug)]
+ struct Treasure<T>{
+        treasure1:String,
+        treasure2: T,
+    }
+
+    //for type i32: this mthod only work when the value type of treasure2 is integer
+impl Treasure<i32>{
+    fn first_integer(&self) {
+        self.treasure2;
+        println!("{}",self.treasure2)
+    }
+
+}
+
+    //for type array consisting of integers: this mthod only work when the value type of treasure2 is array of lenght 3 consisting of only integer
+impl Treasure<[i32; 3]>{
+    fn load_of_trasure(&self) -> usize {
+        self.treasure2.len()
+    }
+ 
+}
+
+
+//WE CAN WRITE A METHOD THAT WORKS FOR ALL THOUGH YEEEE
+impl <T> Treasure<T> {
+    fn for_all(&self)  -> String{
+        self.treasure1.to_uppercase()
+    }
+    
+}
+let found1 = Treasure{
+    treasure1:String::from("Sanmi"),
+    treasure2:32
+};
+
+found1.first_integer();
+println!("{:?}",found1.for_all());
+// found1.load_of_treasure() //this wont work because treasure2 is integer, it expect array of integers of lenth 3
+
+let found2 = Treasure{
+    treasure1:String::from("victoria"),
+    treasure2:[1,2,3]
+};
+println!("{}",found2.for_all());
+println!("{}",found2.load_of_trasure());
+
+let found3 = Treasure{
+    treasure1:String::from("Sanmi"),
+    treasure2:true
+};
+
 }
 
