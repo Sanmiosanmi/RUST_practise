@@ -53,6 +53,20 @@ fn create_user(username:String, email:String) -> user {
 }
 */
 
+use std::collections::HashMap;
+
+trait Accommodation {
+    fn get_description(&self)->String;
+    fn booking(&mut self, name:&str, night:u32);
+}
+
+//let define Datatypes 
+struct Hotel{
+    name:String,
+    reservation:HashMap<String,u32>,
+}
+
+//LET DEFINE A DEFAULT implementation FOR THE DATATYPE
     //generally 
 
 fn main() {
@@ -353,6 +367,12 @@ let found3 = Treasure{
     treasure1:String::from("Sanmi"),
     treasure2:true
 };
+
+
+//TRAITS IN DEEP
+
+
+
 
 }
 
