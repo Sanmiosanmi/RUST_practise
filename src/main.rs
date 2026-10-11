@@ -1,5 +1,5 @@
 
-/* 
+
 mod Method_struct;
 mod tuple_struct;
 mod enums;
@@ -31,6 +31,9 @@ use crate::tuple_struct::display_color;
 use crate::tuple_struct::find_user;
 use enums::_Interface;
 use Traits::Router;
+use Traits::Hotel;
+use Traits::Airbnb;
+use Traits::Accommodation;
 
 
 
@@ -51,22 +54,11 @@ fn create_user(username:String, email:String) -> user {
         active: true,
     }
 }
-*/
 
-use std::collections::HashMap;
 
-trait Accommodation {
-    fn get_description(&self)->String;
-    fn booking(&mut self, name:&str, night:u32);
-}
 
-//let define Datatypes 
-struct Hotel{
-    name:String,
-    reservation:HashMap<String,u32>,
-}
 
-//LET DEFINE A DEFAULT implementation FOR THE DATATYPE
+//implentation on line 426
     //generally 
 
 fn main() {
@@ -315,7 +307,7 @@ let logger = VerbosityFilter { max_verbosity: 3, inner: StderrLogger };
  /* when we write  and impl method for a generic struct, we have to deine the type it will accept
  ahead. the only felxibilty is that we can write diffrernt impl block for the same struct, just by changing the tpye expeected
    */
- 
+ /* 
 #[derive(Debug)]
  struct Treasure<T>{
         treasure1:String,
@@ -368,9 +360,21 @@ let found3 = Treasure{
     treasure2:true
 };
 
+*/
+
 
 //TRAITS IN DEEP
 
+let mut hotel = Hotel::new("Atiola");
+println!("{}",hotel.get_description()); // Beacuse we dont define a get_description method fot Hotel, it uses the default in the trait
+hotel.booking("Sanmi", 5);
+println!("{:?}",hotel);
+println!("{}",hotel.summarize());
+
+let mut airbnb = Airbnb::new("peter");
+println!("{}",airbnb.get_description());//we have a defined get_description
+airbnb.booking("vic", 3);
+println!("{:?}",airbnb);
 
 
 

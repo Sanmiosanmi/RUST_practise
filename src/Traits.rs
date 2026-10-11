@@ -116,3 +116,75 @@ impl Logger for VerbosityFilter{
     }
 
 }
+
+use std::collections::HashMap;
+
+pub trait Accommodation {
+    fn get_description(&self)->String{
+        String::from("A wonderful place to stay")
+    }
+    fn booking(&mut self, name:&str, night:u32);
+}
+
+//let define Datatypes 
+#[derive(Debug)]
+pub struct Hotel{
+   pub name:String,
+   pub reservation:HashMap<String,u32>,
+}
+
+//LET DEFINE A DEFAULT implementation FOR THE DATATYPE
+ impl Hotel{
+pub  fn new(name:&str)-> Self{
+        Self{
+            name:name.to_string(),
+            reservation:HashMap::new(),
+        }
+    }
+    //CALLING A TRAIT METHOD FROM ANOTHER METHOD, still inside the impl Hotel
+   pub fn summarize(&self)->String{
+        format!("welcome {}:{}",self.name, self.get_description())
+    }
+
+}
+
+// NOW WE CAN IMPLEMENT THE ACCOMMODATION TRAIT ON HOTEL
+ impl Accommodation for Hotel
+  {
+    //fn get_description(&self)->String {
+        //format!("{} is the best hotel in Town",self.name)}
+    fn booking(&mut self, name:&str, night:u32) {
+        self.reservation.insert(name.to_string(), night); //.to_string() convert from &str to String
+    }
+    
+}
+#[derive(Debug)]
+pub struct Airbnb{
+    pub host:String,
+    pub guests:Vec<(String,u32)>
+}
+impl Airbnb {
+   pub  fn new(host:&str) -> Self {
+        Self{
+            host:host.to_string(),
+            guests: vec![],
+        }
+    }   
+}
+
+impl Accommodation for Airbnb {
+    fn get_description(&self)->String {
+        format!("Please enjoy {} Airbnd", self.host)
+    }
+    fn booking(&mut self, name:&str, night:u32) {
+        self.guests.push((name.to_string(),night));
+    }
+    
+}
+
+//passing a Trait as a parameter to a function "entity: &impl Accommodation" any type that implemet the accomodation trait
+//we can also invoke any method inside the trait
+pub fn book_for_one_night(entity: &impl Accommodation){
+ //let invoke the get_description method 
+    println!("{}",entity.get_description());
+}
