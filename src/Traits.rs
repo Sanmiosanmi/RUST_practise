@@ -184,7 +184,12 @@ impl Accommodation for Airbnb {
 
 //passing a Trait as a parameter to a function "entity: &impl Accommodation" any type that implemet the accomodation trait
 //we can also invoke any method inside the trait
-pub fn book_for_one_night(entity: &impl Accommodation){
+pub fn book_for_one_night(entity: &mut impl Accommodation, guest:&str) {
  //let invoke the get_description method 
     println!("{}",entity.get_description());
+
+    entity.booking(guest, 1);// wen we invoke the book_for_one_night function, it inturns invoke the 
+    //booking  method around the type implementing it
+
+
 }

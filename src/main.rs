@@ -20,6 +20,7 @@ use crate::Traits::Connect;
 use crate::Traits::Logger;
 use crate::Traits::StderrLogger;
 use crate::Traits::VerbosityFilter;
+use crate::Traits::book_for_one_night;
 use crate::enums::_status_code;
 use crate::enums::_status_code_new;
 use crate::enums::ConnectionState;
@@ -373,8 +374,15 @@ println!("{}",hotel.summarize());
 
 let mut airbnb = Airbnb::new("peter");
 println!("{}",airbnb.get_description());//we have a defined get_description
-airbnb.booking("vic", 3);
+//airbnb.booking("vic", 3);
 println!("{:?}",airbnb);
+
+
+//Implementing the traits as a parater for a funcrion
+book_for_one_night(&mut hotel,"Ade hotel");
+book_for_one_night(&mut airbnb, "Ade air");
+println!("{:?}",airbnb);
+
 
 
 
