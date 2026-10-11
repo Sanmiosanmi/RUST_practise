@@ -158,6 +158,8 @@ pub  fn new(name:&str)-> Self{
     }
     
 }
+
+
 #[derive(Debug)]
 pub struct Airbnb{
     pub host:String,
@@ -184,12 +186,38 @@ impl Accommodation for Airbnb {
 
 //passing a Trait as a parameter to a function "entity: &impl Accommodation" any type that implemet the accomodation trait
 //we can also invoke any method inside the trait
-pub fn book_for_one_night(entity: &mut impl Accommodation, guest:&str) {
+pub fn book_for_one_night(entity: &mut impl Accommodation,value:&mut impl Accommodation,  guest:&str) {
  //let invoke the get_description method 
     println!("{}",entity.get_description());
 
-    entity.booking(guest, 1);// wen we invoke the book_for_one_night function, it inturns invoke the 
+    entity.booking(guest, 1);
+    value.booking(guest, 1);// wen we invoke the book_for_one_night function, it inturns invoke the 
     //booking  method around the type implementing it
+}
+
+//TRAIT BOUND: Atrait bound requires that a generic type implement a specific trait
+//here both T in the entity and value must besame type that implemnt Accommodation. implenting the above is better. 
+pub fn book_for_two_night<T: Accommodation>(entity: &mut T,value:&mut T, guest:&str) {
+       entity.booking(guest, 1);
+       value.booking(guest, 2);
+}
+
+//MULTIPLE TRAIT BOUND
+ pub trait Menu {
+    fn food(&self)->String{
+        String::from("What a wonderful food") 
+    }    
+ }
+ impl Menu for Hotel {}
+ 
 
 
+
+pub fn three_night(entity: &mut( impl Accommodation + Menu),value:&mut impl Accommodation,  guest:&str) {
+    //entity implement the two traits Accomodation and Mneu,    
+
+    entity.booking(guest, 1);
+    entity.food();
+    value.booking(guest, 1);// wen we invoke the book_for_one_night function, it inturns invoke the 
+    //booking  method around the type implementing it
 }

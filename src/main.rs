@@ -15,12 +15,14 @@ use tuple_struct::Color;
 use tuple_struct::UserId;
 use tuple_struct::ProductId;
 use tuple_struct::Numbers;
+use crate::Traits::Menu;
 use crate::Traits::Router1;
 use crate::Traits::Connect;
 use crate::Traits::Logger;
 use crate::Traits::StderrLogger;
 use crate::Traits::VerbosityFilter;
 use crate::Traits::book_for_one_night;
+use crate::Traits::three_night;
 use crate::enums::_status_code;
 use crate::enums::_status_code_new;
 use crate::enums::ConnectionState;
@@ -379,9 +381,12 @@ println!("{:?}",airbnb);
 
 
 //Implementing the traits as a parater for a funcrion
-book_for_one_night(&mut hotel,"Ade hotel");
-book_for_one_night(&mut airbnb, "Ade air");
+book_for_one_night(&mut hotel,&mut airbnb,"Ade hotel");
+book_for_one_night(&mut airbnb, &mut hotel, "Ade air");
 println!("{:?}",airbnb);
+println!("{:?}",hotel);
+ three_night(&mut hotel, &mut airbnb, "sunky");
+
 
 
 
