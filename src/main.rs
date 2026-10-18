@@ -363,7 +363,7 @@ let found3 = Treasure{
     treasure2:true
 };
 
-*/
+
 
 
 //TRAITS IN DEEP
@@ -389,6 +389,88 @@ println!("{:?}",hotel);
 
 
 
+//RESULT AND OPTION ENUM
+
+let ok:Result<i32,&str> = Result::Ok(5); //NOTE WE HAVE TO SPECIFY THE TYPE OF ERROr, ok is already infered 
+println!("{ok:?}");
+
+
+let disaster:Result<i32,&str> = Result::Err("this is an error"); //NOTE WE HAVE TO SPECIFY THE TYPE OF OK, error is already infered 
+println!("{disaster:?}");
+
+//RESULT METHOD ENUM , THE PARSE METHOD ON A STRING
+
+let input = "42";
+
+// .parse() returns Result<i32, ParseIntError>
+let result: Result<i32, _> = input.parse();
+// let result1: Result<&str, _> = input.parse(); this wont run because .parse only check for integer within a string 
+
+match result {
+    Ok(number) => println!("Successfully parsed number: {}", number),
+   
+    Err(err) => println!("Failed to parse string: {}", err),
+    
+} 
+
+  //Returning a Result Enum from a Function 
+
+  fn divide(numerator:f64, denominator:f64)-> Result<f64,String>{
+    if denominator == 0.0{
+        Err("Cannot divide by zero".to_string())
+    }else{
+        Ok(numerator / denominator)
+    }
+  }
+
+  let result = divide(10.0, 2.0);
+
+  match result {
+      Ok(calulation)=>println!("Result: {}", calulation),//we just use calculation as a place holder 
+      Err(message)=>println!("Error: {}",message), // we just use message as a place holder 
+  }
+
+       //Result methods
+       //Unwrap.unwrap() is a method in Rust used to directly extract the successful value from a Result or an Option enum, with the trade-off that it will immediately crash (panic) your program if an error occurs, it does not extract the error message,instead it panic.
+ let result1 =  divide(10.0, 2.0);
+ //println!("{}", result1.unwrap());
+
+ // .expect("message"): Functions identically to .unwrap(), but allows you to specify a custom crash message so you know exactly why it failed during debugging.
+  let result1 =  divide(10.0, 0.0);
+// println!("{}", result1.expect("Error"));
+
+   //.unwrap_or(default_value): Safely extracts the value, but if there is an error, it provides the fallback default_value you specify instead of crashing.
+let result1 =  divide(10.0, 0.0);
+  // println!("{}", result1.unwrap_or(3.4));
+
+    //is_ok() : return a bool to test if the value is passed 
+    let result1 =  divide(10.0, 0.0);
+// println!("{}", result1.is_ok());
+
+ //is_err() : return a bool to test if the value is not passed 
+    let result1 =  divide(10.0, 0.0);
+ // println!("{}", result1.is_err());
+*/
+    // Nuances of unwrap method on Result
+
+    fn operation (great_sucess:bool)-> Result<String, String>{
+        if great_sucess{
+            Ok("Success".to_string())
+        }else {
+            Err("Errr".to_string())
+        }
+    }
+
+let my_result = operation(true);
+let content = match my_result{
+    Ok(message) => message,
+    Err(error)=>error,
+};
+//NOTE: We cant call oeration again because ownership has being burrowed, but if we refrence my_result, 
+//i.e &my_result we can then be able to burrow it.
+
+// another possinble solution is to use sliced string that use the copiy trait, it does not follow the rule 
+//of ownership i.e fn operation (great_sucess:bool)-> Result<&´static str, &´static str>
 
 
 }
